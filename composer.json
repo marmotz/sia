@@ -1,0 +1,16 @@
+{
+    "name": "marmotz/thot",
+    "description": "Book generator",
+    "require-dev": {
+        "atoum/atoum": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "marmotz",
+            "email": "rlittolff@gmail.com"
+        }
+    ],
+    "require": {
+
+    }
+}
