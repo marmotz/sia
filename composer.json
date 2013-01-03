@@ -1,16 +1,42 @@
 {
-    "name": "marmotz/thot",
+    "name": "marmotz/sia",
     "description": "Book generator",
-    "require-dev": {
-        "atoum/atoum": "dev-master"
-    },
+    "version"    : "0.0.0",
+    "type"       : "application",
+    "keywords"   : ["rst", "book", "generator"],
+    "homepage"   : "http://github.com/marmotz/sia",
+    "license"    : "GPL-3.0",
     "authors": [
         {
             "name": "marmotz",
-            "email": "rlittolff@gmail.com"
+            "email": "rlittolff@gmail.com",
+            "homepage": "http://totalement.geek.oupas.fr"
         }
     ],
+    "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url" : "http://github.com/marmotz/SkrivMarkup"
+        }
+    ],
+    "require-dev": {
+        "atoum/atoum": "dev-master"
+    },
     "require": {
-
-    }
+        "php"                : ">=5.3",
+        "ulrichsg/getopt-php": "dev-master",
+        "amaury/skrivmarkup" : "*"
+    },
+    "suggest": {
+        "atoum/atoum": "Allows you to test rst2html"
+    },
+    "autoload": {
+        "psr-0": {
+            "marmotz\\sia": "src/"
+        }
+    },
+    "bin": [
+        "bin/sia"
+    ]
 }

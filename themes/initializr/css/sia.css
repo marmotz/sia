@@ -1,0 +1,30 @@
+p {
+    text-align: justify;
+}
+
+.info,
+.warning {
+    min-height: 84px;
+    background-color: #EEEEEE;
+}
+
+.info i,
+.warning i {
+    color: #DDDDDD;
+    padding: 10px 0 10px 10px;
+}
+
+.info p,
+.warning p {
+    font-style: italic;
+    padding: 5px 20px;
+}
+
+pre {
+    padding: 5px;
+}
+
+pre.shell {
+    background-color: black;
+    color: white;
+}
