@@ -4,24 +4,40 @@ p {
 
 .info,
 .warning {
-    min-height: 84px;
+    display: table;
     background-color: #EEEEEE;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px;
+    margin-bottom: 20px;
 }
 
 .info i,
 .warning i {
     color: #DDDDDD;
-    padding: 10px 0 10px 10px;
+    display: table-cell;
+    vertical-align: top;
+    padding: .35em;
+    margin: 0!important;
 }
 
 .info p,
 .warning p {
     font-style: italic;
-    padding: 5px 20px;
+    padding: 5px 20px 5px 0;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.info p tt,
+.warning p tt {
+    font-style: normal;
 }
 
 pre {
     padding: 5px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px;
+    font-size: .9em;
 }
 
 pre.shell {
