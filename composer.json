@@ -14,12 +14,6 @@
         }
     ],
     "minimum-stability": "dev",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url" : "http://github.com/Amaury/SkrivMarkup"
-        }
-    ],
     "require-dev": {
         "atoum/atoum": "dev-master"
     },
