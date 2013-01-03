@@ -46,8 +46,8 @@
 
     $renderer = \Skriv\Markup\Renderer::factory();
 
-    foreach(glob($input . '/*.sml') as $inputFile) {
-        $outputFile = $output . '/' . str_replace('.sml', '.html', basename($inputFile));
+    foreach(glob($input . '/*.skriv') as $inputFile) {
+        $outputFile = $output . '/' . str_replace('.skriv', '.html', basename($inputFile));
 
         writeln(
             'Convert %s into %s',
