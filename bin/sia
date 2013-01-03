@@ -69,10 +69,10 @@
             )
         );
 
-        preg_match('#<h1>(.*)</h1>#u', $page, $result);
+        preg_match('#<h1[^<]*>(.*)</h1>#u', $page, $result);
         $title = isset($result[1]) ? $result[1] : '';
 
-        $toc = $renderer->getTOC();
+        $toc = '';
 
         file_put_contents(
             $outputFile,
