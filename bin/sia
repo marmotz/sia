@@ -22,7 +22,7 @@
         array(
             array('i', 'input',  Getopt::REQUIRED_ARGUMENT, 'Documentation input directory'),
             array('o', 'output', Getopt::REQUIRED_ARGUMENT, 'Output directory'),
-            array('t', 'theme',  Getopt::OPTIONAL_ARGUMENT, 'Theme (default=minimalistic)'),
+            array('t', 'theme',  Getopt::OPTIONAL_ARGUMENT, 'Theme'),
         )
     );
 
@@ -30,7 +30,7 @@
 
     $input  = rtrim($getopt->getOption('i'), DIRECTORY_SEPARATOR);
     $output = rtrim($getopt->getOption('o'), DIRECTORY_SEPARATOR);
-    $theme  = __DIR__ . '/../themes/' . ($getopt->getOption('t') ?: 'minimalistic');
+    $theme  = __DIR__ . '/../themes/' . ($getopt->getOption('t') ?: 'default');
 
     if(!file_exists($input)) {
         throw new RuntimeException("Input directory \"$input\" does not exist.");
@@ -72,16 +72,17 @@
             $page
         );
 
-        // Renumerate titles
+        // renumerate titles
         $rawToc = $renderer->getToc(true);
-        $page = reworkTitles($page, $rawToc);
+        $page   = reworkTitles($page, $rawToc);
 
-        // getPage Title
+        // get page title
         $title = $rawToc[0]['value'];
 
         // generate toc
         $toc = generateTocHtmlList($rawToc);
 
+        // write file
         file_put_contents(
             $outputFile,
             str_replace(
