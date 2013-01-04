@@ -1,5 +1,71 @@
-p {
+/* ===================
+    ALL: Blue Theme
+   =================== */
+
+.header-container {
+    border-bottom: 20px solid #74bff9;
+}
+
+.footer-container,
+.main aside {
+    border-top: 20px solid #74bff9;
+}
+
+.header-container,
+.footer-container,
+.main aside {
+    background: #3d91e7;
+}
+
+.title {
+    color: white;
+}
+
+#page a {
+    color: #3d91e7;
+}
+
+#page a.actionLink:hover {
+    color: #74bff9;
+}
+
+.info i,
+.warning i {
+    color: #74bff9;
+}
+
+
+
+/* ===================
+    Sia Theme
+   =================== */
+
+
+p, li {
     text-align: justify;
+}
+
+a {
+    text-decoration: none;
+}
+
+tt {
+    font-size: .9em;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#page a.actionLink {
+    color: #ddd;
+    font-size: 1em;
+    margin-left: 6px;
+    padding: 0 4px 0 4px;
+}
+
+#page a.actionLink:hover {
+    text-decoration: none;
 }
 
 .info,
@@ -9,11 +75,11 @@ p {
     border-radius: 15px;
     box-shadow: 1px 1px 5px;
     margin-bottom: 20px;
+    width: 100%;
 }
 
 .info i,
 .warning i {
-    color: #DDDDDD;
     display: table-cell;
     vertical-align: top;
     padding: .35em;
@@ -26,6 +92,7 @@ p {
     padding: 5px 20px 5px 0;
     display: table-cell;
     vertical-align: middle;
+    width: 100%;
 }
 
 .info p tt,
@@ -43,4 +110,19 @@ pre {
 pre.shell {
     background-color: black;
     color: white;
+}
+
+#toc {
+    font-size: .8em;
+}
+
+#toc a {
+    color: white;
+}
+
+ul.toc-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 1.3em;
 }

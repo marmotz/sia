@@ -55,24 +55,32 @@
             $outputFile
         );
 
+        $page = $renderer->render(
+            file_get_contents($inputFile)
+        );
+
+        // use FontAwesome for info and warning
         $page = str_replace(
             array(
                 '<div class="info">',
                 '<div class="warning">',
             ),
             array(
-                '<div class="info"><i class="icon-info-sign icon-4x pull-left"></i>',
-                '<div class="info"><i class="icon-exclamation-sign icon-4x pull-left"></i>',
+                '<div class="info"><i class="icon-info-sign icon-4x"></i>',
+                '<div class="info"><i class="icon-exclamation-sign icon-4x"></i>',
             ),
-            $renderer->render(
-                file_get_contents($inputFile)
-            )
+            $page
         );
 
-        preg_match('#<h1[^<]*>(.*)</h1>#u', $page, $result);
-        $title = isset($result[1]) ? $result[1] : '';
+        // Renumerate titles
+        $rawToc = $renderer->getToc(true);
+        $page = reworkTitles($page, $rawToc);
 
-        $toc = '';
+        // getPage Title
+        $title = $rawToc[0]['value'];
+
+        // generate toc
+        $toc = generateTocHtmlList($rawToc);
 
         file_put_contents(
             $outputFile,
@@ -100,6 +108,74 @@
         }
     }
 
+
+    function reworkTitles($html, $array, $level = 1, $numerotationPrefix = '') {
+        $cpt = 0;
+
+        foreach($array as $item) {
+            $cpt++;
+
+            $currentNumerotation = $numerotationPrefix . $cpt . '.';
+
+            $html = str_replace(
+                sprintf(
+                    '<h%d id="%s">%s</h%d>',
+                    $level,
+                    $item['id'],
+                    $item['value'],
+                    $level
+                ),
+                sprintf(
+                    '<h%d id="%s">%s %s%s%s</h%d>',
+                    $level,
+                    $item['id'],
+                    $currentNumerotation,
+                    $item['value'],
+                    sprintf(
+                        '<a class="actionLink icon-link" href="#%s" title="Permalink to this headline"></a>',
+                        $item['id']
+                    ),
+                    '<a class="actionLink icon-circle-arrow-up" href="#top" title="Go to top of page"></a>',
+                    $level
+                ),
+                $html
+            );
+
+            if(isset($item['sub'])) {
+                $html = reworkTitles($html, $item['sub'], $level + 1, $currentNumerotation);
+            }
+        }
+
+        return $html;
+    }
+
+    function generateTocHtmlList($array, $numerotationPrefix = '') {
+        $cpt  = 0;
+
+        $html = '<ul class="toc-list">';
+
+        foreach($array as $item) {
+            $cpt++;
+
+            $currentNumerotation = $numerotationPrefix . $cpt . '.';
+
+            $html .= '<li>';
+            $html .= sprintf(
+                '<a href="#%s">%s %s</a>',
+                $item['id'],
+                $currentNumerotation,
+                $item['value']
+            );
+
+            if(isset($item['sub'])) {
+                $html .= generateTocHtmlList($item['sub'], $currentNumerotation);
+            }
+
+            $html .= '</li>';
+        }
+
+        return $html . '</ul>';
+    }
 
     function writeln() {
         $args = func_get_args();
