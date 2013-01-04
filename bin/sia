@@ -44,10 +44,13 @@
         throw new RuntimeException("Theme directory \"$theme\" does not exist.");
     }
 
+
     $renderer = \Skriv\Markup\Renderer::factory();
+    $pages = array();
 
     foreach(glob($input . '/*.skriv') as $inputFile) {
-        $outputFile = $output . '/' . str_replace('.skriv', '.html', basename($inputFile));
+        $outputFile = str_replace('.skriv', '.html', basename($inputFile));
+        $outputPath = $output . '/' . $outputFile;
 
         writeln(
             'Convert %s into %s',
@@ -55,12 +58,20 @@
             $outputFile
         );
 
-        $page = $renderer->render(
-            file_get_contents($inputFile)
+        $pages[] = array(
+            'output'  => $outputPath,
+            'url'     => $outputFile,
+            'content' => $renderer->render(
+                file_get_contents($inputFile)
+            )
         );
+    }
 
+    $rawToc = $renderer->getToc(true);
+
+    foreach($pages as $key => $page) {
         // use FontAwesome for info and warning
-        $page = str_replace(
+        $pages[$key]['content'] = str_replace(
             array(
                 '<div class="info">',
                 '<div class="warning">',
@@ -69,22 +80,21 @@
                 '<div class="info"><i class="icon-info-sign icon-4x"></i>',
                 '<div class="info"><i class="icon-exclamation-sign icon-4x"></i>',
             ),
-            $page
+            $pages[$key]['content']
         );
 
         // renumerate titles
-        $rawToc = $renderer->getToc(true);
-        $page   = reworkTitles($page, $rawToc);
+        $pages[$key]['content'] = reworkTitles($pages[$key]['content'], $rawToc);
 
         // get page title
-        $title = $rawToc[0]['value'];
+        $title = $rawToc[$key]['value'];
 
         // generate toc
-        $toc = generateTocHtmlList($rawToc);
+        $toc = generateTocHtmlList($rawToc, $pages);
 
         // write file
         file_put_contents(
-            $outputFile,
+            $pages[$key]['output'],
             str_replace(
                 array(
                     '{title}',
@@ -93,7 +103,7 @@
                 ),
                 array(
                     $title,
-                    $page,
+                    $pages[$key]['content'],
                     $toc,
                 ),
                 file_get_contents($theme . '/page.html')
@@ -150,7 +160,7 @@
         return $html;
     }
 
-    function generateTocHtmlList($array, $numerotationPrefix = '') {
+    function generateTocHtmlList($array, $pages, $level = 0, $numerotationPrefix = '', $page = 0) {
         $cpt  = 0;
 
         $html = '<ul class="toc-list">';
@@ -162,17 +172,22 @@
 
             $html .= '<li>';
             $html .= sprintf(
-                '<a href="#%s">%s %s</a>',
+                '<a href="%s#%s">%s %s</a>',
+                $pages[$page]['url'],
                 $item['id'],
                 $currentNumerotation,
                 $item['value']
             );
 
             if(isset($item['sub'])) {
-                $html .= generateTocHtmlList($item['sub'], $currentNumerotation);
+                $html .= generateTocHtmlList($item['sub'], $pages, $level + 1, $currentNumerotation, $page);
             }
 
             $html .= '</li>';
+
+            if($level === 0) {
+                $page++;
+            }
         }
 
         return $html . '</ul>';
