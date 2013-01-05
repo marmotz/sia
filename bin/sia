@@ -53,9 +53,8 @@
         $outputPath = $output . '/' . $outputFile;
 
         writeln(
-            'Convert %s into %s',
-            $inputFile,
-            $outputFile
+            'Read %s',
+            $inputFile
         );
 
         $pages[] = array(
@@ -70,15 +69,22 @@
     $rawToc = $renderer->getToc(true);
 
     foreach($pages as $key => $page) {
+        writeln(
+            'Create %s',
+            $pages[$key]['output']
+        );
+
         // use FontAwesome for info and warning
         $pages[$key]['content'] = str_replace(
             array(
                 '<div class="info">',
                 '<div class="warning">',
+                '<div class="todo">',
             ),
             array(
                 '<div class="info"><i class="icon-info-sign icon-4x"></i>',
-                '<div class="info"><i class="icon-exclamation-sign icon-4x"></i>',
+                '<div class="info"><i class="icon-warning-sign icon-4x"></i>',
+                '<div class="info"><i class="icon-leaf icon-4x"></i>',
             ),
             $pages[$key]['content']
         );
@@ -86,11 +92,43 @@
         // renumerate titles
         $pages[$key]['content'] = reworkTitles($pages[$key]['content'], $rawToc);
 
+        // geshi
+        $geshi = new GeSHi();
+        $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS);
+
+        preg_match_all('#<pre class="([^"]+)">(.*)</pre>#sU', $pages[$key]['content'], $matches);
+
+        foreach($matches[0] as $k => $match) {
+            $geshi->set_language($matches[1][$k]);
+            if($geshi->error() === false) {
+                $geshi->set_source(trim(html_entity_decode($matches[2][$k])));
+
+                $pages[$key]['content'] = str_replace(
+                    $match,
+                    $geshi->parse_code(),
+                    $pages[$key]['content']
+                );
+            }
+        }
+
         // get page title
         $title = $rawToc[$key]['value'];
 
         // generate toc
         $toc = generateTocHtmlList($rawToc, $pages);
+
+        // generate previous/next links
+        $previous = $next = '';
+
+        if(isset($rawToc[$key - 1])) {
+            $previous .= '<i class="icon-chevron-left"></i> ';
+            $previous .= '<a href="' . $pages[$key - 1]['url'] . '">' . $rawToc[$key - 1]['value'] . '</a>';
+        }
+
+        if(isset($rawToc[$key + 1])) {
+            $next .= '<a href="' . $pages[$key + 1]['url'] . '">' . $rawToc[$key + 1]['value'] . '</a>';
+            $next .= ' <i class="icon-chevron-right"></i>';
+        }
 
         // write file
         file_put_contents(
@@ -100,11 +138,15 @@
                     '{title}',
                     '{page}',
                     '{toc}',
+                    '{previous}',
+                    '{next}',
                 ),
                 array(
                     $title,
                     $pages[$key]['content'],
                     $toc,
+                    $previous,
+                    $next,
                 ),
                 file_get_contents($theme . '/page.html')
             )
