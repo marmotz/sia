@@ -23,20 +23,31 @@
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="title">atoum's documentation</h1>
-                <!-- <nav>
-                    <ul>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                        <li><a href="#">nav ul li a</a></li>
-                    </ul>
-                </nav> -->
             </header>
         </div>
 
         <div class="main-container">
             <div class="main wrapper clearfix">
                 <article id="page">
+                    <header>
+                        <div class="next">
+                            {next}
+                        </div>
+                        <div class="previous">
+                            {previous}
+                        </div>
+                    </header>
+
                     {page}
+
+                    <footer>
+                        <div class="next">
+                            {next}
+                        </div>
+                        <div class="previous">
+                            {previous}
+                        </div>
+                    </footer>
                 </article>
 
                 <aside id="toc">

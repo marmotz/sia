@@ -21,6 +21,11 @@
     color: white;
 }
 
+#page .next i,
+#page .previous i {
+    color: #3d91e7;
+}
+
 #page a {
     color: #3d91e7;
 }
@@ -55,6 +60,10 @@ tt {
 
 a:hover {
     text-decoration: underline;
+}
+
+#page .next {
+    float: right;
 }
 
 #page a.actionLink {
@@ -105,6 +114,8 @@ pre {
     border-radius: 5px;
     box-shadow: 1px 1px 5px;
     font-size: .9em;
+    line-height: 1.2em;
+    background-color: #e4f0f9;
 }
 
 pre.shell {
