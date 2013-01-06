@@ -34,9 +34,12 @@
     color: #74bff9;
 }
 
-.info i,
-.warning i {
+.message i {
     color: #74bff9;
+}
+
+blockquote i {
+    color: #ddd!important;
 }
 
 
@@ -52,6 +55,14 @@ p, li {
 
 a {
     text-decoration: none;
+}
+
+blockquote {
+    margin: 0;
+}
+
+blockquote p {
+    text-align: left;
 }
 
 tt {
@@ -77,26 +88,30 @@ a:hover {
     text-decoration: none;
 }
 
-.info,
-.warning {
+.message {
     display: table;
-    background-color: #EEEEEE;
+    background-color: #eee;
     border-radius: 15px;
-    box-shadow: 1px 1px 5px;
     margin-bottom: 20px;
     width: 100%;
 }
 
-.info i,
-.warning i {
+div.message {
+    box-shadow: 1px 1px 5px;
+}
+
+blockquote.message {
+    border: 1px solid #ddd;
+}
+
+.message i {
     display: table-cell;
     vertical-align: top;
     padding: .35em;
     margin: 0!important;
 }
 
-.info p,
-.warning p {
+.message p {
     font-style: italic;
     padding: 5px 20px 5px 0;
     display: table-cell;
@@ -104,11 +119,11 @@ a:hover {
     width: 100%;
 }
 
-.info p tt,
-.warning p tt {
+.message p tt {
     font-style: normal;
 }
 
+.code,
 pre {
     padding: 5px;
     border-radius: 5px;
@@ -116,6 +131,12 @@ pre {
     font-size: .9em;
     line-height: 1.2em;
     background-color: #e4f0f9;
+    margin-bottom: 20px;
+}
+
+.code {
+    white-space: nowrap;
+    overflow: auto;
 }
 
 pre.shell {
@@ -127,13 +148,29 @@ pre.shell {
     font-size: .8em;
 }
 
+#toc li {
+    text-align: left;
+}
+
 #toc a {
     color: white;
 }
 
-ul.toc-list {
-    padding: 0;
+#toc ul.toc-list {
+    padding: 0 0 0 10px;
     margin: 0;
     list-style: none;
     line-height: 1.3em;
+}
+
+#toc > ul {
+    padding: 0!important;
+}
+
+#toc > ul > li {
+    padding-bottom: 10px;
+}
+
+#toc > ul > li > a {
+    font-size: 1.5em;
 }

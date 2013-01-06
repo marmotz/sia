@@ -80,11 +80,13 @@
                 '<div class="info">',
                 '<div class="warning">',
                 '<div class="todo">',
+                '<blockquote>',
             ),
             array(
-                '<div class="info"><i class="icon-info-sign icon-4x"></i>',
-                '<div class="info"><i class="icon-warning-sign icon-4x"></i>',
-                '<div class="info"><i class="icon-leaf icon-4x"></i>',
+                '<div class="message info"><i class="icon-info-sign icon-4x"></i>',
+                '<div class="message warning"><i class="icon-warning-sign icon-4x"></i>',
+                '<div class="message todo"><i class="icon-leaf icon-4x"></i>',
+                '<blockquote class="message"><i class="icon-quote-left icon-4x icon-muted"></i>',
             ),
             $pages[$key]['content']
         );
@@ -95,24 +97,25 @@
         // geshi
         $geshi = new GeSHi();
         $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS);
+        $geshi->set_header_type(GESHI_HEADER_DIV);
 
         preg_match_all('#<pre class="([^"]+)">(.*)</pre>#sU', $pages[$key]['content'], $matches);
 
         foreach($matches[0] as $k => $match) {
-            $geshi->set_language($matches[1][$k]);
+            $geshi->set_language($matches[1][$k], true);
             if($geshi->error() === false) {
                 $geshi->set_source(trim(html_entity_decode($matches[2][$k])));
 
                 $pages[$key]['content'] = str_replace(
                     $match,
-                    $geshi->parse_code(),
+                    '<div class="code">' . $geshi->parse_code() . '</div>',
                     $pages[$key]['content']
                 );
             }
         }
 
         // get page title
-        $title = $rawToc[$key]['value'];
+        $title = $rawToc[$key]['value'] . " - atoum's documentation";
 
         // generate toc
         $toc = generateTocHtmlList($rawToc, $pages);
