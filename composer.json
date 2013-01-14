@@ -20,7 +20,7 @@
     "require": {
         "php"                : ">=5.3",
         "ulrichsg/getopt-php": "dev-master",
-        "amaury/skrivmarkup" : "*",
+        "amaury/skrivmarkup" : "dev-master",
         "easybook/geshi"     : "dev-master"
     },
     "suggest": {
