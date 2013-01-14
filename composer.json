@@ -13,7 +13,6 @@
             "homepage": "http://totalement.geek.oupas.fr"
         }
     ],
-    "minimum-stability": "dev",
     "require-dev": {
         "atoum/atoum": "dev-master"
     },
@@ -28,7 +27,7 @@
     },
     "autoload": {
         "psr-0": {
-            "marmotz\\sia": "src/"
+            "Mattlab\\Sia": "src/"
         }
     },
     "bin": [
