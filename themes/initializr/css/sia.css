@@ -123,7 +123,6 @@ blockquote.message {
     font-style: normal;
 }
 
-.code,
 pre {
     padding: 5px;
     border-radius: 5px;
@@ -132,16 +131,25 @@ pre {
     line-height: 1.2em;
     background-color: #e4f0f9;
     margin-bottom: 20px;
-}
-
-.code {
-    white-space: nowrap;
+    white-space: pre;
+    word-wrap: normal;
     overflow: auto;
 }
 
-pre.shell {
+pre.language-shell {
     background-color: black;
     color: white;
+}
+
+pre.language-shell ol,
+pre.language-vim ol {
+    margin: 1em;
+    padding: 0;
+}
+
+pre.language-shell ol li,
+pre.language-vim ol li {
+    list-style: none;
 }
 
 #toc {
