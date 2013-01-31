@@ -51,7 +51,12 @@ class Cli
             throw new RuntimeException('Theme directory "' . $theme . '" does not exist.');
         }
 
-        $renderer = \Skriv\Markup\Renderer::factory();
+        $renderer = \Skriv\Markup\Renderer::factory(
+            'html',
+            array(
+                'codeInlineStyles' => true,
+            )
+        );
         $pages = array();
 
         foreach (glob($input . '/*.skriv') as $inputFile) {
@@ -73,6 +78,7 @@ class Cli
         }
 
         $rawToc = $renderer->getToc(true);
+        unset($renderer);
 
         foreach ($pages as $key => $page) {
             Cli::writeln(
@@ -99,26 +105,6 @@ class Cli
 
             // renumerate titles
             $pages[$key]['content'] = self::reworkTitles($pages[$key]['content'], $rawToc);
-
-            // geshi
-            // $geshi = new GeSHi();
-            // $geshi->enable_line_numbers(GESHI_FANCY_LINE_NUMBERS);
-            // $geshi->set_header_type(GESHI_HEADER_DIV);
-
-            // preg_match_all('#<pre class="([^"]+)">(.*)</pre>#sU', $pages[$key]['content'], $matches);
-
-            // foreach ($matches[0] as $k => $match) {
-            //     $geshi->set_language($matches[1][$k], true);
-            //     if ($geshi->error() === false) {
-            //         $geshi->set_source(trim(html_entity_decode($matches[2][$k])));
-
-            //         $pages[$key]['content'] = str_replace(
-            //             $match,
-            //             '<div class="code">' . $geshi->parse_code() . '</div>',
-            //             $pages[$key]['content']
-            //         );
-            //     }
-            // }
 
             // get page title
             $title = $rawToc[$key]['value'] . " - atoum's documentation";
@@ -171,18 +157,18 @@ class Cli
         }
     }
 
-    public static function reworkTitles($html, $array, $level = 1, $numerotationPrefix = '')
+    public static function reworkTitles($html, $toc, $level = 1, $numerotationPrefix = '')
     {
         $cpt = 0;
 
-        foreach ($array as $item) {
+        foreach ($toc as $item) {
             $cpt++;
 
             $currentNumerotation = $numerotationPrefix . $cpt . '.';
 
-            $html = str_replace(
+            $html = preg_replace(
                 sprintf(
-                    '<h%d id="%s">%s</h%d>',
+                    '#<h%d id="%s">%s</h%d>#',
                     $level,
                     $item['id'],
                     $item['value'],
@@ -201,7 +187,8 @@ class Cli
                     '<a class="actionLink icon-circle-arrow-up" href="#top" title="Go to top of page"></a>',
                     $level
                 ),
-                $html
+                $html,
+                1
             );
 
             if (isset($item['sub'])) {

@@ -20,6 +20,7 @@
         "php"                : ">=5.3",
         "ulrichsg/getopt-php": "dev-master",
         "amaury/skrivmarkup" : "dev-master",
+        "amaury/wikirenderer": "dev-master",
         "easybook/geshi"     : "dev-master"
     },
     "suggest": {
