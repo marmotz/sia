@@ -86,19 +86,21 @@ class Cli
                 $pages[$key]['output']
             );
 
-            // use FontAwesome for info and warning
+            // typo
             $pages[$key]['content'] = str_replace(
                 array(
-                    '<div class="info">',
-                    '<div class="warning">',
-                    '<div class="todo">',
-                    '<blockquote>',
+                    '« ',
+                    ' »',
+                    ' !',
+                    ' ?',
+                    ' :',
                 ),
                 array(
-                    '<div class="message info"><i class="icon-info-sign icon-4x"></i>',
-                    '<div class="message warning"><i class="icon-warning-sign icon-4x"></i>',
-                    '<div class="message todo"><i class="icon-leaf icon-4x"></i>',
-                    '<blockquote class="message"><i class="icon-quote-left icon-4x icon-muted"></i>',
+                    '«&nbsp;',
+                    '&nbsp;»',
+                    '&nbsp;!',
+                    '&nbsp;?',
+                    '&nbsp;:',
                 ),
                 $pages[$key]['content']
             );
