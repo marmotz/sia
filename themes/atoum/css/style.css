@@ -229,6 +229,14 @@ pre.language-vim ol li {
     padding-bottom: 10px;
 }
 
+#toc > ul > li > ul {
+	display: none;
+}
+
+#toc > ul > li.active > ul {
+	display: block;
+}
+
 #toc > ul > li > a {
     font-size: 1.5em;
 }
