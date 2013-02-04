@@ -128,7 +128,9 @@ blockquote {
 blockquote {
     border: 1px solid #ddd;
     margin: 0 0 20px 0;
-    background-image: url('../images/quote.png');
+    background: 10px  10px url('../images/quote-left.png')  no-repeat,
+                right 10px url('../images/quote-right.png') no-repeat,
+                #EEE;
 }
 
 .info {
@@ -156,6 +158,10 @@ blockquote p {
     padding: 5px 20px 5px 0;
     margin-left: 80px;
     text-align: left;
+}
+
+blockquote p {
+    margin-right: 80px;
 }
 
 .info p tt,
