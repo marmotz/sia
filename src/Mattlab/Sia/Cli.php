@@ -112,7 +112,7 @@ class Cli
             $title = $rawToc[$key]['value'] . " - atoum's documentation";
 
             // generate toc
-            $toc = self::generateTocHtmlList($rawToc, $pages);
+            $toc = self::generateTocHtmlList($rawToc, $key, $pages);
 
             // generate previous/next links
             $previous = $next = '';
@@ -201,7 +201,7 @@ class Cli
         return $html;
     }
 
-    public static function generateTocHtmlList($array, $pages, $level = 0, $numerotationPrefix = '', $page = 0)
+    public static function generateTocHtmlList($array, $key, $pages, $level = 0, $numerotationPrefix = '', $page = 0)
     {
         $cpt  = 0;
 
@@ -211,8 +211,13 @@ class Cli
             $cpt++;
 
             $currentNumerotation = $numerotationPrefix . $cpt . '.';
+            
+            // Generates an active class on current top-level element
+            $attrs = ($level === 0 and $item['id'] === $array[$key]['id'])
+            		? ' class="active"'
+            		: '';
 
-            $html .= '<li>';
+            $html .= '<li'.$attrs.'>';
             $html .= sprintf(
                 '<a href="%s#%s">%s %s</a>',
                 $pages[$page]['url'],
@@ -222,7 +227,7 @@ class Cli
             );
 
             if (isset($item['sub'])) {
-                $html .= self::generateTocHtmlList($item['sub'], $pages, $level + 1, $currentNumerotation, $page);
+                $html .= self::generateTocHtmlList($item['sub'], $key, $pages, $level + 1, $currentNumerotation, $page);
             }
 
             $html .= '</li>';
