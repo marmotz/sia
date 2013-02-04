@@ -40,15 +40,15 @@ class Cli
         $theme  = self::$rootPath . '/themes/' . ($getopt->getOption('t') ?: 'default');
 
         if (!file_exists($input)) {
-            throw new RuntimeException('Input directory "' . $input . '" does not exist.');
+            throw new \RuntimeException('Input directory "' . $input . '" does not exist.');
         }
 
         if (!file_exists($output)) {
-            throw new RuntimeException('Output directory "' . $output . '" does not exist.');
+            throw new \RuntimeException('Output directory "' . $output . '" does not exist.');
         }
 
         if (!file_exists($theme)) {
-            throw new RuntimeException('Theme directory "' . $theme . '" does not exist.');
+            throw new \RuntimeException('Theme directory "' . $theme . '" does not exist.');
         }
 
         $renderer = \Skriv\Markup\Renderer::factory(
