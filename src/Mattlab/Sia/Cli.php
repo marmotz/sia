@@ -86,6 +86,9 @@ class Cli
                 $pages[$key]['output']
             );
 
+            // renumerate titles
+            $pages[$key]['content'] = self::reworkTitles($pages[$key]['content'], $rawToc);
+
             // typo
             $pages[$key]['content'] = str_replace(
                 array(
@@ -104,9 +107,6 @@ class Cli
                 ),
                 $pages[$key]['content']
             );
-
-            // renumerate titles
-            $pages[$key]['content'] = self::reworkTitles($pages[$key]['content'], $rawToc);
 
             // get page title
             $title = $rawToc[$key]['value'] . " - atoum's documentation";
@@ -173,7 +173,7 @@ class Cli
                     '#<h%d id="%s">%s</h%d>#',
                     $level,
                     $item['id'],
-                    $item['value'],
+                    preg_quote($item['value']),
                     $level
                 ),
                 sprintf(
