@@ -42,6 +42,11 @@ blockquote i {
     color: #ddd!important;
 }
 
+.footer-container,
+.footer-container a {
+    color: white;
+}
+
 
 
 /* ===================
@@ -231,4 +236,12 @@ pre.language-vim ol li {
 
 #toc > ul > li > a {
     font-size: 1.5em;
+}
+
+.footer-container a {
+    text-decoration: underline;
+}
+
+.footer-container a:hover {
+    text-decoration: none;
 }

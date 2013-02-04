@@ -1,61 +1,65 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{title}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{title}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-        <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=VT323' rel='stylesheet' type='text/css'>
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
-        <link rel="stylesheet" href="css/font-awesome.css">
-        <link rel="stylesheet" href="css/style.css">
-    </head>
-    <body id="top">
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <img src="images/logo.png" width="176" height="144" />
-                <h1 class="title">atoum's documentation</h1>
-            </header>
-        </div>
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/font-awesome.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="top">
+    <div class="header-container">
+        <header class="wrapper clearfix">
+            <img src="images/logo.png" width="176" height="144" />
+            <h1 class="title">atoum's documentation</h1>
+        </header>
+    </div>
 
-        <div class="main-container">
-            <div class="main wrapper clearfix">
-                <article id="page">
-                    <header>
-                        <div class="next">
-                            {next}
-                        </div>
-                        <div class="previous">
-                            {previous}
-                        </div>
-                    </header>
+    <div class="main-container">
+        <div class="main wrapper clearfix">
+            <article id="page">
+                <header>
+                    <div class="next">
+                        {next}
+                    </div>
+                    <div class="previous">
+                        {previous}
+                    </div>
+                </header>
 
-                    {page}
+                {page}
 
-                    <footer>
-                        <div class="next">
-                            {next}
-                        </div>
-                        <div class="previous">
-                            {previous}
-                        </div>
-                    </footer>
-                </article>
+                <footer>
+                    <div class="next">
+                        {next}
+                    </div>
+                    <div class="previous">
+                        {previous}
+                    </div>
+                </footer>
+            </article>
 
-                <aside id="toc">
-                    {toc}
-                </aside>
-            </div> <!-- #main -->
-        </div> <!-- #main-container -->
+            <aside id="toc">
+                {toc}
+            </aside>
+        </div> <!-- #main -->
+    </div> <!-- #main-container -->
 
-        <div class="footer-container">
-            <footer class="wrapper">
-                <!-- <h3>footer</h3> -->
-            </footer>
-        </div>
-    </body>
+    <div class="footer-container">
+        <footer class="wrapper">
+            Something is wrong in the documentation ?
+            Help us fix this by
+            <a href="https://github.com/atoum/atoum-documentation/issues" target="_blank">
+                reporting errors and problems !
+            </a>
+        </footer>
+    </div>
+</body>
 </html>
