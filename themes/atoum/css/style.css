@@ -128,7 +128,7 @@ blockquote {
 blockquote {
     border: 1px solid #ddd;
     margin: 0 0 20px 0;
-    /*background-image: url('../images/quote.png');*/
+    background-image: url('../images/quote.png');
 }
 
 .info {
@@ -140,7 +140,7 @@ blockquote {
 }
 
 .todo {
-    /*background-image: url('../images/todo.png');*/
+    background-image: url('../images/todo.png');
 }
 
 .inheritance {
