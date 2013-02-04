@@ -201,13 +201,13 @@ class Cli
         return $html;
     }
 
-    public static function generateTocHtmlList($array, $pages, $level = 0, $numerotationPrefix = '', $page = 0)
+    public static function generateTocHtmlList($toc, $pages, $level = 0, $numerotationPrefix = '', $page = 0)
     {
         $cpt  = 0;
 
         $html = '<ul class="toc-list">';
 
-        foreach ($array as $item) {
+        foreach ($toc as $item) {
             $cpt++;
 
             $currentNumerotation = $numerotationPrefix . $cpt . '.';
