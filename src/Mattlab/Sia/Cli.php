@@ -186,7 +186,7 @@ class Cli
                         '<a class="actionLink icon-link" href="#%s" title="Permalink to this headline"></a>',
                         $item['id']
                     ),
-                    '<a class="actionLink icon-circle-arrow-up" href="#top" title="Go to top of page"></a>',
+                    '<a class="actionLink icon-th-list" href="#toc" title="Go to table of contents"></a>',
                     $level
                 ),
                 $html,
@@ -214,7 +214,8 @@ class Cli
 
             $html .= '<li>';
             $html .= sprintf(
-                '<a href="%s#%s">%s %s</a>',
+                '<a id="toc-%s" href="%s#%s">%s %s</a>',
+                $item['id'],
                 $pages[$page]['url'],
                 $item['id'],
                 $currentNumerotation,

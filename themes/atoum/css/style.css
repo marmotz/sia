@@ -47,6 +47,11 @@ blockquote i {
     color: white;
 }
 
+#toc a.active {
+    color: black;
+}
+
+
 
 
 /* ===================
@@ -85,13 +90,21 @@ header img {
 }
 
 header h1 {
-    margin: 20px 0 0 20px;
+    margin: 165px 0 0 20px;
     font-family: 'Conv_pixelart', monospace;
     font-weight: normal;
-    font-size: 50px;
+    font-size: 30px;
     line-height: 1em;
-    width: 500px;
+    width: 450px;
     text-shadow: 2px 2px 10px #333;
+}
+
+@media only screen and (min-width: 768px) {
+    header h1 {
+        margin: 20px 0 0 20px;
+        font-size: 50px;
+        width: 500px;
+    }
 }
 
 #page .next {
@@ -208,6 +221,40 @@ pre.language-vim ol li {
 
 #toc {
     font-size: .8em;
+    overflow: auto;
+}
+
+@media only screen and (max-width: 768px) {
+    #toc {
+        clear: both;
+    }
+}
+
+#toc.fixed {
+    height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    #toc.fixed {
+        position: fixed;
+        top: 0;
+        margin-left: 636px;
+        width: 287px;
+        padding: 0 52px 10px 51px;
+        bottom: 0;
+    }
+
+    a.actionLink.icon-th-list {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1140px) {
+    #toc.fixed {
+        margin-left: 55.8%;
+        width: 25.2%;
+        padding: 0 4.5% 10px;
+    }
 }
 
 #toc li {
