@@ -71,7 +71,10 @@ blockquote i {
 @font-face {
     font-family: 'Conv_pixelart';
     src: url('../fonts/pixelart.eot');
-    src: local('☺'), url('../fonts/pixelart.woff') format('woff'), url('../fonts/pixelart.ttf') format('truetype'), url('../fonts/pixelart.svg') format('svg');
+    src: local('☺'),
+         url('../fonts/pixelart.woff') format('woff'),
+         url('../fonts/pixelart.ttf')  format('truetype'),
+         url('../fonts/pixelart.svg')  format('svg');
     font-weight: normal;
     font-style: normal;
 }
