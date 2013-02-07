@@ -6,9 +6,13 @@
     border-bottom: 20px solid #74bff9;
 }
 
-.footer-container,
+.footer-container {
+    border-top: 20px solid #74bff9;
+}
+
 .main aside {
     border-top: 20px solid #74bff9;
+    border-bottom: 20px solid #74bff9;
 }
 
 .header-container,
@@ -32,6 +36,11 @@ header h1 {
 
 #page a.actionLink:hover {
     color: #74bff9;
+}
+
+#page p tt {
+    background-color: #DDD;
+    box-shadow: 1px 1px 0 #CCC;
 }
 
 .message i {
@@ -111,15 +120,30 @@ header h1 {
     float: right;
 }
 
+#page h1,
+#page h2,
+#page h3,
+#page h4,
+#page h5,
+#page h6 {
+    text-decoration: underline;
+}
+
 #page a.actionLink {
     color: #ddd;
     font-size: 1em;
     margin-left: 6px;
     padding: 0 4px 0 4px;
+    text-decoration: none;
 }
 
 #page a.actionLink:hover {
     text-decoration: none;
+}
+
+#page p tt {
+    border-radius: 7px;
+    padding: 0 5px;
 }
 
 .info,

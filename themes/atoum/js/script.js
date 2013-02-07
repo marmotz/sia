@@ -2,13 +2,15 @@ var positionToc;
 
 $(window).resize(
     function() {
-        var isFixed = $('#toc').hasClass("fixed");
-        $('#toc').removeClass("fixed");
+        var $toc = $('#toc');
 
-        positionToc = $('#toc').offset().top;
+        var isFixed = $toc.hasClass("fixed");
+        $toc.removeClass("fixed");
+
+        positionToc = $toc.offset().top;
 
         if(isFixed) {
-            $('#toc').addClass("fixed");
+            $toc.addClass("fixed");
         }
 
         resizeToc();
@@ -17,13 +19,16 @@ $(window).resize(
 ).resize();
 
 function resizeToc() {
-    if($(window).width() >= 768) {
-        var scrollTop = $(window).scrollTop();
-        var windowHeight = $(window).height();
-        var menuHeight = windowHeight - 30;
+    var $toc = $('#toc');
+    var $window = $(window);
+
+    if($window.width() >= 768) {
+        var scrollTop = $window.scrollTop();
+        var windowHeight = $window.height();
+        var menuHeight = windowHeight - 50;
 
         if (scrollTop >= positionToc) {
-            $('#toc').addClass("fixed");
+            $toc.addClass("fixed");
 
             var footerHeight = 0;
             var footerTop = $('.footer-container').offset().top - 30;
@@ -33,19 +38,21 @@ function resizeToc() {
                 footerHeight = windowBottom - footerTop;
             }
 
-            $('#toc').height(menuHeight - footerHeight);
+            $toc.height(menuHeight - footerHeight);
         }
         else {
-            $('#toc').removeClass("fixed");
-            $('#toc').height(menuHeight - positionToc + scrollTop);
+            $toc.removeClass("fixed");
+            $toc.height(menuHeight - positionToc + scrollTop);
         }
     }
     else {
-        $('#toc').height('auto');
+        $toc.height('auto');
     }
 }
 
 function displayCurrentTocElement() {
+    var $toc = $('#toc');
+
     if($(window).width() >= 768) {
         var scrollTop = $(window).scrollTop();
 
@@ -65,14 +72,14 @@ function displayCurrentTocElement() {
                         $header = $header.prev();
                     }
 
-                    $('#toc a.active').removeClass('active');
-                    var $tocAnchor = $('#toc a#toc-' + $header.attr('id'));
+                    $toc.find('a.active').removeClass('active');
+                    var $tocAnchor = $toc.find('a#toc-' + $header.attr('id'));
 
                     $tocAnchor.addClass('active');
 
-                    $('#toc').scrollTop(
-                        $('#toc').scrollTop() -
-                        (($('#toc').outerHeight(true) / 2) - $('#toc a.active').position().top)
+                    $toc.scrollTop(
+                        $toc.scrollTop() -
+                        (($toc.outerHeight(true) / 2) - $toc.find('a.active').position().top)
                     );
 
                     // break loop
@@ -82,7 +89,7 @@ function displayCurrentTocElement() {
         );
     }
     else {
-        $('#toc a.active').removeClass('active');
+        $toc.find('a.active').removeClass('active');
     }
 }
 
