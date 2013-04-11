@@ -1,0 +1,1 @@
+RedirectMatch permanent /fr/chapter([0-9]+).html /fr/chapitre$1.html

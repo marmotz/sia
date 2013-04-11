@@ -77,6 +77,10 @@ class Cli
             );
         }
 
+        if(isset($pages[0])) {
+            exec('ln -s ' . $pages[0]['output'] . ' ' . $output . '/index.html');
+        }
+
         $rawToc = $renderer->getToc(true);
         unset($renderer);
 
