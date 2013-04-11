@@ -150,11 +150,24 @@ class Cli
             );
         }
 
-        foreach (array('css', 'js', 'javascript', 'javascripts', 'img', 'image', 'images', 'font', 'fonts') as $dir) {
-            exec("rm -rf $output/$dir");
+        $itemsToCopy = array(
+            'css',
+            'js',
+            'javascript',
+            'javascripts',
+            'img',
+            'image',
+            'images',
+            'font',
+            'fonts',
+            '.htaccess'
+        );
 
-            if (file_exists("$theme/$dir")) {
-                exec("cp -rf $theme/$dir $output/");
+        foreach ($itemsToCopy as $item) {
+            exec("rm -rf $output/$item");
+
+            if (file_exists("$theme/$item")) {
+                exec("cp -r $theme/$item $output/");
             }
         }
     }
