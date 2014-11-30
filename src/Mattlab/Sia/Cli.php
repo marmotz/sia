@@ -1,7 +1,7 @@
 <?php
 namespace Mattlab\Sia;
 
-use Ulrichsg\Getopt;
+use Ulrichsg\Getopt\Getopt;
 
 class Cli
 {
