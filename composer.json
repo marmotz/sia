@@ -18,7 +18,7 @@
     },
     "require": {
         "php"                : ">=5.3",
-        "ulrichsg/getopt-php": "dev-master",
+        "ulrichsg/getopt-php": "~2.2",
         "amaury/skrivmarkup" : "dev-master",
         "amaury/wikirenderer": "dev-master",
         "easybook/geshi"     : "dev-master"
